@@ -4,7 +4,7 @@ export default function reserve(state = [], action){
 
   // FAZ A CHAMADA PARA A AÇÃO DO BOTÃO
   switch (action.type) {
-    case 'ADD_RESERVE':
+    case 'ADD_RESERVE_SUCCESS':
       return produce(state, draft => {
         // Pega o ID da reserva e modifica a quantidade caso já exista na lista
         const tripIndex = draft.findIndex(trip => trip.id === action.trip.id);

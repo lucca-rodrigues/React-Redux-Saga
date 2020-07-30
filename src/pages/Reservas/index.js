@@ -32,11 +32,15 @@ export default function Reservas() {
               alt={reserve.title}
             />
             <strong>{reserve.title}</strong>
-            <div>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
               <buton type="button" onClick={() => decrementReserve(reserve)}>
                 <MdRemoveCircle size={20} color="#191919"/>
               </buton>
-              <input type="text" readOnly value={reserve.amount}/>Quantidade: 
+              <input type="text" readOnly value={reserve.amount} style={{width: 30}}/>
               <buton type="button" onClick={() => incrementReserve(reserve)}>
                 <MdAddCircle size={20} color="#191919"/>
               </buton>

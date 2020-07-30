@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import { MdFlightTakeoff } from 'react-icons/md'
-import { addReserve } from '../../store/modules/reserve/actions';
+import { addReserveRequest } from '../../store/modules/reserve/actions';
 
 import api from '../../services/api';
 import './style.css';
@@ -21,9 +21,9 @@ export default function Home() {
 
  }, []);
 
- function handleAddReserve(trip){
+ function handleAddReserve(id){
    // ADD os Dados da reserva clicada ao State do Redux
-   dispatch(addReserve(trip)); 
+   dispatch(addReserveRequest(id)); 
  }
 
  return (
@@ -37,7 +37,7 @@ export default function Home() {
 
            <button
            type="button"
-           onClick={()=> handleAddReserve(trip)}
+           onClick={()=> handleAddReserve(trip.id)}
            >  
              <div>
                <MdFlightTakeoff size={16} color="#FFF" />
