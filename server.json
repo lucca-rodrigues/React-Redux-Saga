@@ -32,5 +32,8 @@
       "status": true,
       "image": "https://sujeitoprogramador.com/wp-content/uploads/2019/12/fernand-noronha.jpg"
     }
+  ],
+  "start": [
+    {"TO START": "json-server server.json -p 3333"}
   ]
 }
