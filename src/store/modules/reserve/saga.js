@@ -1,6 +1,8 @@
 import { select, call, put, all, takeLatest } from 'redux-saga/effects';
 import { addReserveSuccess, updateAmountReserveSuccess} from './actions'
 import api from '../../../services/api';
+import history from '../../../services/history';
+
  
 // O * e yield é como se fosse o Async Await mas dentro do Saga
 // Esta funcão realiza uma requisição GET via Redux (tirando a necessidade de fazer a requisção toda hora do mesmo conteúdo);
@@ -36,8 +38,7 @@ function* addToReserve({ id }){
       };
   
       yield put(addReserveSuccess(data));
-  
-      //history.push('/reservas');
+      history.push('/reservas');
     }
   
   } 
