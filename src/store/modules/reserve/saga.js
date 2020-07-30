@@ -1,5 +1,5 @@
 import { select, call, put, all, takeLatest } from 'redux-saga/effects';
-import { addReserveSuccess, updateAmountReserve} from './actions'
+import { addReserveSuccess, updateAmountReserveSuccess} from './actions'
 import api from '../../../services/api';
  
 // O * e yield é como se fosse o Async Await mas dentro do Saga
@@ -25,7 +25,7 @@ function* addToReserve({ id }){
   
     if(tripExists){ 
   
-      yield put(updateAmountReserve(id, amount));
+      yield put(updateAmountReserveSuccess(id, amount));
   
     }else{
       const response = yield call(api.get, `trips/${id}` );
@@ -40,11 +40,24 @@ function* addToReserve({ id }){
       //history.push('/reservas');
     }
   
-  
-  
   } 
+
+  function* updateAmount({ id, amount}){
+      if(amount <= 0) return;
+
+      const myStock = yield call(api.get, `/stock/${id}`);
+
+      const stockValue = myStock.data.amount;
+
+      if(amount > stockValue){
+          alert('Quantidade máxima atingida!');
+          return;
+      }
+      yield put(updateAmountReserveSuccess(id, amount));
+  }
 
 export default all([
     // Evita Várias requisicões ao mesmo tempo se clicar mais de uma vez no botão
-    takeLatest('ADD_RESERVE_REQUEST', addToReserve)
+    takeLatest('ADD_RESERVE_REQUEST', addToReserve),
+    takeLatest('UPDATE_RESERVE_REQUEST', updateAmount),
 ]);
